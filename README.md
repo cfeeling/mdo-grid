@@ -22,6 +22,7 @@ TO DO:
 
 - Typescript implementation alongisde pure angular
 - Definetely Typed (.d.ts) implementation & submission
+- Test multiple grids in the same page and/or different pages in the app.
 
 
 
@@ -155,36 +156,37 @@ and the code for the table pagination view is:
 
 ```
 <ul class="pagination">
-	<li ng-if="$grid.firstPage">
-	     <a ng-click="$grid.setPage($grid.firstPage)" ng-href="">
-	        &laquo;
-	    </a>
-	</li>
-	<li ng-if="$grid.previousPage">
-	     <a ng-click="$grid.setPage($grid.previousPage)" ng-href="">
-	        &laquo;
-	        &laquo;
-	    </a>
-	</li>
+    <li ng-class="{'disabled': $grid.page == $grid.firstPage }" ng-if="$grid.firstPage">
+         <a ng-if="$grid.page != $grid.firstPage" ng-click="$grid.setPage($grid.firstPage)" ng-href="">
+            &laquo;  &laquo;
+         </a>
+        <span ng-if="$grid.page == $grid.firstPage">&laquo;  &laquo;</span>
+    </li>
+    <li ng-class="{'disabled': $grid.page == $grid.firstPage }" ng-if="$grid.previousPage">
+        <a ng-if="$grid.page != $grid.firstPage" ng-click="$grid.setPage($grid.previousPage)" ng-href="">
+            &laquo;
+         </a>
+        <span ng-if="$grid.page == $grid.firstPage">&laquo;</span>
+    </li>
 
-	<li ng-class="{'disabled': page == $grid.page }" ng-repeat="page in $grid.pages">
-	    <a ng-click="$grid.setPage(page)" ng-href="">
-	        {{ page }}
-	    </a>
-	</li>
+    <li ng-class="{'disabled': page == $grid.page }" ng-repeat="page in $grid.pages">
+        <a ng-click="$grid.setPage(page)" ng-href="">
+            {{ page }}
+        </a>
+    </li>
 
-	<li ng-if="$grid.nextPage">
-	    <a ng-click="$grid.setPage($grid.nextPage)" ng-href="">
-	        &raquo;
-	        &raquo;
-	    </a>
-	</li>
-
-	<li ng-if="$grid.lastPage">
-	    <a ng-click="$grid.setPage($grid.lastPage)" ng-href="">
-	        &raquo;
-	    </a>
-	</li>
+    <li ng-class="{'disabled': $grid.page == $grid.lastPage }" ng-if="$grid.nextPage">
+        <a ng-if="$grid.page != $grid.lastPage" ng-click="$grid.setPage($grid.nextPage)" ng-href="">
+            &raquo;
+         </a>
+        <span ng-if="$grid.page == $grid.lastPage">&raquo;</span>
+    </li>
+    <li ng-class="{'disabled': $grid.page == $grid.lastPage }" ng-if="$grid.lastPage">
+         <a ng-if="$grid.page != $grid.lastPage" ng-click="$grid.setPage($grid.lastPage)" ng-href="">
+            &raquo;  &raquo;
+         </a>
+        <span ng-if="$grid.page == $grid.lastPage">&raquo;  &raquo;</span>
+    </li>
 </ul>
 ```
 
