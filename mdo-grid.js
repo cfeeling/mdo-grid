@@ -1,8 +1,10 @@
-angular.module('mdo.grid', []).directive('mdoGrid', ['$q', 'mdoGridConfig', function ($q, mdoGridConfig) {
+angular.module('mdo.grid', []).directive('mdoGrid', ['$q', function ($q, mdoGridConfig) {
     return {
         priority: 1,
         scope: false,
-        link: function (scope, tElm, tAttrs) {
+        link: function (scope, element, attributes) {
+
+            var mdoGridConfig = scope[attributes.mdoGrid];
 
             var $grid = {
                 sorting: {},

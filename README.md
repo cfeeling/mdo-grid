@@ -22,7 +22,6 @@ TO DO:
 
 - Typescript implementation alongisde pure angular
 - Definetely Typed (.d.ts) implementation & submission
-- Multiple grids per page (and test for multiple grids per app)
 
 
 
@@ -84,7 +83,7 @@ mdoGridConfig.getData = function(defered, params, $grid) {
 
 
 // Send the grid config to the view
-$scope.mdoGridConfig = mdoGridConfig;
+$scope.config = mdoGridConfig;
 
 // If we change the nb of items per page, change it also in the grid
 $scope.$watch('countPerPage', function(newVal, oldVal){
@@ -118,7 +117,7 @@ $scope.reload = function() {
 
 ```
 <!-- some view.html -->
-<table mdo-grid ng-hide="$grid.isLoading || $grid.total == 0">
+<table mdo-grid="config" ng-hide="$grid.isLoading || $grid.total == 0">
 	<thead>
 		<tr>
 			<th
