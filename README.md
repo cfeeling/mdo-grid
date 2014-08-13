@@ -111,8 +111,8 @@ $scope.$watchCollection('filters', function(newValue, oldValue){
 // A simple example of reloading the grid action
 $scope.reload = function() {
 	mdoGridConfig.reload();
-}```
-
+}
+```
 
 5. Define your view as following (please note this is an example; you can use your own html structure)
 
