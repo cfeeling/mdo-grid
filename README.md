@@ -186,8 +186,10 @@ and the code for the table pagination view is:
 	        &raquo;
 	    </a>
 	</li>
-</ul>```
+</ul>
+```
 
 That's it! Cool huh?
 
-For any questions or if you just want to come in contact, feel free to mail us at support@middleout.com
+For any questions or if you just want to come in contact,
+feel free to mail us at support@middleout.com
