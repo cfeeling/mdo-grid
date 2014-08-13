@@ -116,7 +116,7 @@ $scope.reload = function() {
 
 5. Define your view as following (please note this is an example; you can use your own html structure)
 
-
+```
 ```<table mdo-grid ng-hide="$grid.isLoading || $grid.total == 0">
 	<thead>
 		<tr>
