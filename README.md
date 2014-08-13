@@ -22,9 +22,12 @@ TO DO:
 - Typescript implementation alongisde pure angular
 - Definetely Typed (.d.ts) implementation & submission
 
+
+
 HOW TO USE:
 
 1. Download the mdo-grid.js
 2. Place it & include it in your project
 3. In your angular controller, inject the configuration service:
+
 ```.controller('ExampleCtrl', function(mdoGridConfig){ ... });```
