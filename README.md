@@ -34,7 +34,7 @@ HOW TO USE:
 
 ```.controller('ExampleCtrl', function(mdoGridConfig){ ... });```
 
-4. Configure the plugin. Below is an example of a FULL configuration:
+4. Configure the plugin. Below is an example of a FULL configuration, inside a controller:
 
 ```
 // Some object that contains the filters
@@ -63,6 +63,10 @@ mdoGridConfig.setNbOfItemsPerPage(2);
 // Define the get data function where you load your data in an async mode
 mdoGridConfig.getData = function(defered, params, $grid) {
 	// custom API that loads a list of data
+	// the params is an object with a key/value system.
+	// An example request looks like this:
+	// example.com?itemsPerPage=1&page=1&sorting%5Bfname%5D=DESC&filters%5Bemail%5D=asd
+
 	exampleSvc.listUsers( params ).then(function(result) {
 
 		// tell the grid how many total items we have
