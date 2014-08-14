@@ -29,7 +29,10 @@ TO DO:
 HOW TO USE:
 
 1. Download the mdo-grid.js
-2. Place it & include it in your project
+2. Place it & include it in your project like this:
+
+```.module('app', [ ... 'mdoGrid' ...]);```
+
 3. In your angular controller, inject the configuration service:
 
 ```.controller('ExampleCtrl', function(mdoGridConfig){ ... });```
