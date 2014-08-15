@@ -5,15 +5,15 @@ An Angular Module for grids and tables. Its very explicit and doesn't do any mag
 
 UPDATE ON 15 Aug 2014:
 RELEASE 1.0.1
-+Doesn't do automatic loading of data. Usefull for the cases where you want to inject your initial data in the controller so you don't have the grid flicker.
-+Fixed a bug in the pagination system
-+Added 2 more options on the mdoGridConfig:
+- Doesn't do automatic loading of data. Usefull for the cases where you want to inject your initial data in the controller so you don't have the grid flicker.
+- Fixed a bug in the pagination system
+- Added 2 more options on the mdoGridConfig:
 
 ```setInitialCount(number)```
+
 and
+
 ```setInitialData(number)```
-
-
 
 Features:
 
