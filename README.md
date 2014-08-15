@@ -9,11 +9,15 @@ RELEASE 1.0.1
 - Fixed a bug in the pagination system
 - Added 2 more options on the mdoGridConfig:
 
-```setInitialCount(number)```
+```
+setInitialCount(number)
+```
 
 and
 
-```setInitialData(number)```
+```
+setInitialData(number)
+```
 
 Features:
 
