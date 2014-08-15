@@ -3,6 +3,17 @@ Middleout GRID 1.0.0
 
 An Angular Module for grids and tables. Its very explicit and doesn't do any magic at all.
 
+UPDATE ON 15 Aug 2014:
++Doesn't do automatic loading of data. Usefull for the cases where you want to inject your initial data in the controller so you don't have the grid flicker.
++Fixed a bug in the pagination system
++Added 2 more options on the mdoGridConfig:
+
+```setInitialCount(number)```
+and
+```setInitialData(number)```
+
+
+
 Features:
 
 - Sorting
@@ -40,6 +51,11 @@ HOW TO USE:
 4. Configure the plugin. Below is an example of a FULL configuration, inside a controller:
 
 ```
+
+// Assuming you have injected your initial data from the route's resolve feature
+initialData = [someObject, someOtherObject];
+initialDataCount = 100;
+
 // Some object that contains the filters
 var filters = {
 	email: null
@@ -50,6 +66,12 @@ mdoGridConfig.setSorting({ 'fname': 'DESC' });
 
 // Define the sorting direction keywords + default sorting direction
 mdoGridConfig.setSortingKeywords('ASC', 'DESC', 'ASC');
+
+// Force the grid to use this data count w/o doing any request
+mdoGridConfig.setInitialCount(initialDataCount);
+
+// Force the grid to use this data w/o doing any request
+mdoGridConfig.setInitialData(initialData);
 
 // Send the filters to the view
 $scope.filters = filters;
@@ -84,6 +106,10 @@ mdoGridConfig.getData = function(defered, params, $grid) {
 	// important since the internals of the grid depend on this
 	return defered.promise;
 };
+
+// If you did not load your data initially, you want to use the method below to force the
+// grid to actually load your data
+// mdoGridConfig.reload();
 
 
 // Send the grid config to the view
