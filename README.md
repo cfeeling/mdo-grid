@@ -3,6 +3,11 @@ Middleout GRID
 
 An Angular Module for grids and tables. Its very explicit and doesn't do any magic at all.
 
+UPDATE ON 19 Aug 2014:
+RELEASE 1.0.3
+- Added Definetely Typed, Typescript definition. Just point your mdoGrid to be of type: mdo.grid.IGridConfig
+- Added getters to all setters on the config
+
 UPDATE ON 15 Aug 2014:
 RELEASE 1.0.2
 - Doesn't do automatic loading of data. Usefull for the cases where you want to inject your initial data in the controller so you don't have the grid flicker.
