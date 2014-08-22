@@ -4,7 +4,19 @@ angular.module('mdo.grid', []).directive('mdoGrid', ['$q', function ($q, mdoGrid
         scope: false,
         link: function (scope, element, attributes) {
 
-            var mdoGridConfig = scope[attributes.mdoGrid];
+            if (!scope[attributes.mdoGrid]) {
+                var path = attributes.mdoGrid;
+                path = path.split('.');
+
+                var mdoGridConfig = scope;
+                for (i = 0; i < path.length; i ++) {
+                    mdoGridConfig = mdoGridConfig[path[i]];
+                }
+
+
+            } else {
+                var mdoGridConfig = scope[attributes.mdoGrid];
+            }
 
             var $grid = {
                 sorting: {},
@@ -84,34 +96,33 @@ angular.module('mdo.grid', []).directive('mdoGrid', ['$q', function ($q, mdoGrid
                         return;
                     }
 
+                    this.pages = [];
                     this.isLoading = true;
                     var defered = $q.defer();
                     var self = this;
 
+                    var total = self.total;
+                    var count = self.count;
+
                     this.getData(defered, this.toUrl(this.sorting, this.filters, this.page, this.count), this).then(function () {
                         self.isLoading = false;
-                        self.setupPages();
+
+                        var totalPages = Math.ceil(  self.total / self.count );
+
+                        for (var i = 1; i <= totalPages; i ++) {
+                            self.pages.push(i);
+                        }
+                        self.firstPage    = totalPages > 0 ? 1 : 0;
+                        self.lastPage     = totalPages;
+                        self.nextPage     = (self.page + 1 >= totalPages) ? totalPages : self.page + 1;
+                        self.previousPage = (self.page - 1 <= 0) ? 1 : self.page - 1;
+                        self.previousPage = totalPages > 0 ? self.previousPage : 0;
+
+                        if (self.page > self.lastPage && totalPages > 0) {
+                            self.page = self.lastPage;
+                            self.loadData();
+                        }
                     });
-                },
-                setupPages: function() {
-
-                    this.pages = [];
-
-                    var totalPages = Math.ceil(  this.total / this.count );
-
-                    for (var i = 1; i <= totalPages; i ++) {
-                        this.pages.push(i);
-                    }
-                    this.firstPage    = totalPages > 0 ? 1 : 0;
-                    this.lastPage     = totalPages;
-                    this.nextPage     = (this.page + 1 >= totalPages) ? totalPages : this.page + 1;
-                    this.previousPage = (this.page - 1 <= 0) ? 1 : this.page - 1;
-                    this.previousPage = totalPages > 0 ? this.previousPage : 0;
-
-                    if (this.page > this.lastPage && totalPages > 0) {
-                        this.page = this.lastPage;
-                        this.loadData();
-                    }
                 },
                 setPage: function(pageNb){
                     this.page = pageNb;
@@ -125,15 +136,9 @@ angular.module('mdo.grid', []).directive('mdoGrid', ['$q', function ($q, mdoGrid
             $grid.filters         = mdoGridConfig.filters;
             $grid.page            = mdoGridConfig.currentPageNumber;
             $grid.count           = mdoGridConfig.itemsPerPage;
-            $grid.total           = mdoGridConfig.total;
-            $grid.data            = mdoGridConfig.data;
             $grid.config          = mdoGridConfig;
 
-            if ($grid.data.length > 0) {
-                $grid.setupPages();
-            }
-
-//            mdoGridConfig.reload();
+            mdoGridConfig.reload();
             scope.$grid = $grid;
 
             scope.$watch('$grid.config.isReloading', function(value){
@@ -174,6 +179,11 @@ angular.module('mdo.grid', []).directive('mdoGrid', ['$q', function ($q, mdoGrid
         setSorting: function(sorting) {
             this.sorting = sorting;
         },
+
+        getSorting: function() {
+            return this.sorting;
+        },
+
         setSortingKeywords: function(sortAsc, sortDesc, defaultSortDir) {
             this.sortingKeywords = {
                 sortAsc : sortAsc,
@@ -181,9 +191,19 @@ angular.module('mdo.grid', []).directive('mdoGrid', ['$q', function ($q, mdoGrid
                 defaultSortDir: defaultSortDir
             };
         },
+
+        getSortingKeywords: function() {
+            return this.sortingKeywords;
+        },
+
         setFilters: function(filters) {
             this.filters = filters;
         },
+
+        getFilters: function() {
+            return this.filters;
+        },
+
         setNbOfItemsPerPage: function(itemsPerPage) {
 
             if (itemsPerPage > 0) {
@@ -191,14 +211,13 @@ angular.module('mdo.grid', []).directive('mdoGrid', ['$q', function ($q, mdoGrid
             }
 
         },
+
+        getNbOfItemsPerPage: function() {
+            return this.itemsPerPage;
+        },
+
         getData: function(defered, urlParams) {
             // do what you want here
-        },
-        setInitialCount: function(count) {
-            this.total = count;
-        },
-        setInitialData: function(data) {
-            this.data = data;
         }
     }
 });
