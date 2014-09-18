@@ -105,6 +105,7 @@ angular.module('mdo.grid', []).directive('mdoGrid', ['$q', function ($q, mdoGrid
                     var count = self.count;
 
                     this.getData(defered, this.toUrl(this.sorting, this.filters, this.page, this.count), this).then(function () {
+
                         self.isLoading = false;
 
                         var totalPages = Math.ceil(  self.total / self.count );
