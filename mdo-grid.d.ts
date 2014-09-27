@@ -1,6 +1,6 @@
 // Type definitions for MdoGrid (mdo.grid module)
 // Project: https://github.com/middleout/mdo-grid
-// Definitions by: Michel Salib <michelsalib@hotmail.com>
+// Definitions by: Andrei Gabreanu <andrei.gabreanu@middleout.com.com>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
 declare module mdo.grid {
