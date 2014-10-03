@@ -16,6 +16,8 @@ declare module mdo.grid {
         setNbOfItemsPerPage(itemsPerPage: number);
         getNbOfItemsPerPage(): number;
         getData(defered: ng.IDeferred<any>, urlParams: string, mdoGrid: IGridService);
+        setInitialData(data: any): IGridConfig;
+        setInitialCount(count: number): IGridConfig;
     }
 
     interface IGridService {
