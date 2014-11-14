@@ -1,8 +1,10 @@
-angular.module('mdo.grid', []).directive('mdoGrid', ['$q', function ($q, mdoGridConfig) {
+angular.module('mdo.grid', []).directive('mdoGrid', ['$q', function ($q) {
     return {
         priority: 1,
         scope: false,
         link: function (scope, element, attributes) {
+
+            var mdoGridConfig = null;
 
             if (!scope[attributes.mdoGrid]) {
                 var path = attributes.mdoGrid;
@@ -13,7 +15,12 @@ angular.module('mdo.grid', []).directive('mdoGrid', ['$q', function ($q, mdoGrid
                     mdoGridConfig = mdoGridConfig[path[i]];
                 }
             } else {
-                var mdoGridConfig = scope[attributes.mdoGrid];
+                mdoGridConfig = scope[attributes.mdoGrid];
+            }
+
+            if (!mdoGridConfig) {
+                console.log('grid config not found');
+                return false;
             }
 
             var $grid = {
